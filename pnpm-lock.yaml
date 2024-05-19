@@ -29,6 +29,9 @@ importers:
       '@builderbot/provider-baileys':
         specifier: ^1.1.5
         version: 1.1.5
+      '@ffmpeg-installer/ffmpeg':
+        specifier: ^1.1.0
+        version: 1.1.0
       compromise:
         specifier: ^14.13.0
         version: 14.13.0
@@ -38,9 +41,9 @@ importers:
       dotenv:
         specifier: ^16.4.2
         version: 16.4.5
-      es-compromise:
-        specifier: ^0.2.11
-        version: 0.2.11
+      fluent-ffmpeg:
+        specifier: ^2.1.2
+        version: 2.1.2
       openai:
         specifier: ^4.27.0
         version: 4.42.0
@@ -51,6 +54,9 @@ importers:
       '@rollup/plugin-terser':
         specifier: ^0.4.4
         version: 0.4.4(rollup@4.17.2)
+      '@tsconfig/recommended':
+        specifier: ^1.0.6
+        version: 1.0.6
       '@types/node':
         specifier: ^20.12.8
         version: 20.12.10
@@ -877,6 +883,9 @@ packages:
   '@tokenizer/token@0.3.0':
     resolution: {integrity: sha512-OvjF+z51L3ov0OyAU0duzsYuvO01PH7x4t6DJx+guahgTnBHkhJdG7soQeTSFLWN3efnHyibZ4Z8l2EuWwJN3A==}
 
+  '@tsconfig/recommended@1.0.6':
+    resolution: {integrity: sha512-0IKu9GHYF1NGTJiYgfWwqnOQSlnE9V9R7YohHNNf0/fj/SyOZWzdd06JFr0fLpg1Mqw0kGbYg8w5xdkSqLKM9g==}
+
   '@types/babel__core@7.20.5':
     resolution: {integrity: sha512-qoQprZvz5wQFJwMDqeseRXWv3rqMvhgpbXFfVyWhbx9X47POIA6i/+dXefEmZKoAgOaTdaIgNSMqMIU61yRyzA==}
 
@@ -1258,10 +1267,6 @@ packages:
   commondir@1.0.1:
     resolution: {integrity: sha512-W9pAhw0ja1Edb5GVdIF1mjZw/ASI0AlShXM83UUGe2DVr5TdAPEA1OA8m/g8zWp9x6On7gqufY+FatDbC3MDQg==}
 
-  compromise@14.11.1:
-    resolution: {integrity: sha512-Rb7nWsD+5PaMrzTu+wnGbW459DT5877KTEABsZl34JVJ/QuMRyrc4Jsfe5kDXZI00f2XKrMuiuOJJbppCPQq+A==}
-    engines: {node: '>=12.0.0'}
-
   compromise@14.13.0:
     resolution: {integrity: sha512-NqGgcBTRF7Zs3kBWJjKWoYdYTu0tZRcR4yKIA6Ve3KxpD9tgkbDHiVnFrkNYMt26jScrfKPGfVVkGaW++gq4VQ==}
     engines: {node: '>=12.0.0'}
@@ -1406,9 +1411,6 @@ packages:
 
   error-ex@1.3.2:
     resolution: {integrity: sha512-7dFHNmqeFSEt2ZBsCriorKnn3Z2pj+fd9kmI6QoWw4//DL+icEBfc0U7qJCisqrTsKTjw4fNFy2pW9OqStD84g==}
-
-  es-compromise@0.2.11:
-    resolution: {integrity: sha512-5rGBBkrjH9KtrCOOdOFFMfHXE2JKPBXoddzZxvxxdvy+uJzPjyyLxT4/YntDKIuHceZ7J30K497VJl5AQshwNw==}
 
   es-define-property@1.0.0:
     resolution: {integrity: sha512-jxayLKShrEqqzJ0eumQbVhTYQM27CfT1T35+gCgDFoL82JLsXqTJ76zv6A0YLOgEnLUMvLzsDsGIrl8NFpT2gQ==}
@@ -3701,6 +3703,8 @@ snapshots:
 
   '@tokenizer/token@0.3.0': {}
 
+  '@tsconfig/recommended@1.0.6': {}
+
   '@types/babel__core@7.20.5':
     dependencies:
       '@babel/parser': 7.24.5
@@ -4164,12 +4168,6 @@ snapshots:
 
   commondir@1.0.1: {}
 
-  compromise@14.11.1:
-    dependencies:
-      efrt: 2.7.0
-      grad-school: 0.0.5
-      suffix-thumb: 5.0.2
-
   compromise@14.13.0:
     dependencies:
       efrt: 2.7.0
@@ -4286,12 +4284,6 @@ snapshots:
   error-ex@1.3.2:
     dependencies:
       is-arrayish: 0.2.1
-
-  es-compromise@0.2.11:
-    dependencies:
-      compromise: 14.11.1
-      efrt: 2.7.0
-      suffix-thumb: 5.0.2
 
   es-define-property@1.0.0:
     dependencies:

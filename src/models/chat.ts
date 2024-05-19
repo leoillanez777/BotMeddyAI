@@ -1,6 +1,7 @@
 export type Message = {
   message: string
   history: string
+  method?: string
   model?: string
   phone_number?: string
   temperature?: number | 0
@@ -12,6 +13,14 @@ export type Message = {
 
 export type ResponseChat = {
   fecha?: string
+  employee_id?: string
   exact: boolean
-  message: string
+  message: string,
+  identifier?: string
+}
+
+export type SaveChat = {
+  identifier: string
+  nombre: string
+  dni: string
 }

@@ -20,15 +20,17 @@
     "@builderbot-plugins/wali": "^1.0.2",
     "@builderbot/bot": "1.1.5",
     "@builderbot/provider-baileys": "^1.1.5",
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "fluent-ffmpeg": "^2.1.2",
     "compromise": "^14.13.0",
     "date-fns": "^3.3.1",
     "dotenv": "^16.4.2",
-    "es-compromise": "^0.2.11",
     "openai": "^4.27.0",
     "wa-sticker-formatter": "^4.4.4"
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
+    "@tsconfig/recommended": "^1.0.6",
     "@types/node": "^20.12.8",
     "eslint": "^8.52.0",
     "eslint-plugin-builderbot": "1.0.6-alpha.0",

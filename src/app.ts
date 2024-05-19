@@ -1,6 +1,6 @@
 import 'dotenv/config'
-import { createBot, MemoryDB, createProvider } from '@bot-whatsapp/bot'
-import { BaileysProvider } from '@bot-whatsapp/provider-baileys'
+import { createBot, MemoryDB, createProvider } from '@builderbot/bot'
+import { BaileysProvider } from '@builderbot/provider-baileys'
 import AIClass from './services/ai';
 import flows from './flows';
 
@@ -11,13 +11,13 @@ const main = async () => {
 
     const provider = createProvider(BaileysProvider)
 
-    await createBot({
+    const { httpServer } = await createBot({
         database: new MemoryDB(),
         provider,
         flow: flows
     }, { extensions: { ai } })
 
-    provider.initHttpServer(+PORT)
+    httpServer(+PORT)
 }
 
 main()

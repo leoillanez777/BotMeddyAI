@@ -1,4 +1,4 @@
-import { BotContext, BotMethods } from "@bot-whatsapp/bot/dist/types"
+import { BotContext, BotMethods } from "@builderbot/bot/dist/types"
 import { getHistoryParse } from "../utils/handleHistory"
 import AIClass from "../services/ai"
 import { Message } from "src/models/chat"
@@ -11,10 +11,14 @@ import { flowSchedule } from "../flows/schedule.flow"
 export default async (ctx: BotContext, { state, gotoFlow, extensions }: BotMethods) => {
     const ai = extensions.ai as AIClass
     const history = getHistoryParse(state)
-    console.log('Historia en MAIN: ', history)
-    
+    console.log('///////// MAIN LAYER //////////')
+    console.log(`Historia en MAIN de ${ctx.from}: `, history)
+    // TODO: Si envia 2 mensaje a la vez, esperar a conteste el otro.
     const msg: Message = { message: ctx.body, history: history }
     const prediction:string = await ai.createChat(msg)
+
+    console.log('PREDICTION: 👉🏻', prediction)
+    console.log('####### FIN LAYER #######')
 
     if (prediction.includes('TALK')) return gotoFlow(flowSeller)
     if (prediction.includes('SCHEDULE')) return gotoFlow(flowSchedule)

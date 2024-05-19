@@ -1,4 +1,4 @@
-import { BotStateStandAlone } from "@bot-whatsapp/bot/dist/types"
+import { BotStateStandAlone } from "@builderbot/bot/dist/types"
 
 export type History = { role: 'user' | 'assistant', content: string }
 

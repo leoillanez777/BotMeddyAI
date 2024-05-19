@@ -1,4 +1,4 @@
-import { createFlow } from "@bot-whatsapp/bot"
+import { createFlow } from "@builderbot/bot"
 import welcomeFlow from "./welcome.flow"
 import { flowSeller } from "./seller.flow"
 import { flowSchedule } from "./schedule.flow"
