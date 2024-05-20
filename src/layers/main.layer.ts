@@ -18,8 +18,10 @@ export default async (ctx: BotContext, { state, gotoFlow, extensions }: BotMetho
     const prediction:string = await ai.createChat(msg)
 
     console.log('PREDICTION: 👉🏻', prediction)
-    console.log('####### FIN LAYER #######')
-
-    if (prediction.includes('TALK')) return gotoFlow(flowSeller)
-    if (prediction.includes('SCHEDULE')) return gotoFlow(flowSchedule)
+    if (prediction.includes('SCHEDULE')) {
+        return gotoFlow(flowSchedule)
+    }
+    else {
+        return gotoFlow(flowSeller)
+    }
 }

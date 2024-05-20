@@ -44,9 +44,10 @@ const flowConfirm = addKeyword(EVENTS.ACTION).addAction(async (_, { flowDynamic 
         const result:boolean = await ai.grabarTurno(saveData, '/save')
         if (result) {
             clearHistory(state)
-            await flowDynamic('👏🏻 ¡Listo! Evento agendado. Gracias por elegirnos.')
-            await flowDynamic('Por favor, preséntate 5 minutos antes de tu turno.')
-            await flowDynamic('Te enviaremos un recordatorio 1 hora antes de la cita')
+            let msgFinal = '👏🏻 ¡Listo! Evento agendado. Gracias por elegirnos. \n'
+            msgFinal += '\n Por favor, preséntate 5 minutos antes de tu turno.'
+            msgFinal += '\n Te enviaremos un recordatorio 1 hora antes de la cita'
+            await flowDynamic(msgFinal)
         }
         else {
             return endFlow("😭 Lo siento, hubo un inconveniente al reservar la cita. Por favor, inténtalo nuevamente.")

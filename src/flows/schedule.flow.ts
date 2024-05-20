@@ -3,12 +3,12 @@ import { MemoryDB as Database } from '@builderbot/bot'
 import { BaileysProvider as Provider } from '@builderbot/provider-baileys'
 import AIClass from "../services/ai"
 import { RespuestaDelChat } from "../services/ai"
-import { getHistoryParse, handleHistory, getHistory } from "../utils/handleHistory"
+import { getHistoryParse, handleHistory } from "../utils/handleHistory"
 import { generateTimer } from "../utils/generateTimer"
-import { flowConfirm } from "./confirm.flow";
-import { Message, ResponseChat } from "src/models/chat"
+import { flowConfirm } from "./confirm.flow"
+import { flowSeller } from "./seller.flow"
+import { Message } from "src/models/chat"
 import { format, parse } from "date-fns"
-import nlp from 'compromise'
 import { generateStickerMessage } from '../utils/generateSticker'
 
 /**
@@ -65,17 +65,26 @@ const flowSchedule = addKeyword<Provider, Database>(EVENTS.ACTION)
             }
         }
     }
-}).addAction({ capture: true }, async ({ body }, { gotoFlow, flowDynamic, state }) => {
-    const doc = nlp(body.toLowerCase())
-    const palabrasClaveConfirmacion = ['si', 'sí', 'aceptar', 'confirmar', 'listo', 'perfecto', 'dale']
-    const confirmado = palabrasClaveConfirmacion.some((palabra) => doc.has(palabra))
-    await handleHistory({ content: doc.text(), role: 'user' }, state)
-    if (confirmado) return gotoFlow(flowConfirm)
+}).addAction({ capture: true }, async ({ body }, { gotoFlow, endFlow, state, extensions }) => {
+    const ai = extensions.ai as AIClass
+    const history = getHistoryParse(state)
 
-    const message = '¿Te gustaría elegir otra fecha y hora?'
-    await flowDynamic(message)
-    await handleHistory({ content: message, role: 'assistant' }, state)
+    const msg: Message = { message: body, history: history, method: 'confirm' }
+    const confirm:string = await ai.createChat(msg)
+
+    console.log('CONFIRMA?: 👉🏻', confirm)
+
+    await handleHistory({ content: body, role: 'user' }, state)
+
+    if (confirm.includes('ACCEPTED')) return gotoFlow(flowConfirm)
+       
     await state.update({ desiredDate: null, identifier: null })
+
+    if (confirm.includes('REJECTED')) return endFlow("Está bien 👍🏻, ¿hay algo más en lo que pueda ayudarte?")
+      
+    if (confirm.includes('RESCHEDULE')) return gotoFlow(flowSchedule)
+    
+    return gotoFlow(flowSeller)
 })
 
 export { flowSchedule }
