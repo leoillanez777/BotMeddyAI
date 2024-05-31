@@ -41,7 +41,7 @@ const flowConfirm = addKeyword(EVENTS.ACTION).addAction(async (_, { flowDynamic 
             dni: dni
         }
 
-        const result:boolean = await ai.grabarTurno(saveData, '/save')
+        const result:boolean = await ai.grabarTurno(saveData, `/save/${process.env.APP_NAME}`)
         if (result) {
             clearHistory(state)
             let msgFinal = '👏🏻 ¡Listo! Evento agendado. Gracias por elegirnos. \n'

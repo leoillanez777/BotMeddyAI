@@ -14,12 +14,16 @@ const getHistory = (_state: BotStateStandAlone, k = 16) => {
     return limitHistory
 }
 
-const getHistoryParse = (_state: BotStateStandAlone, k = 16): string => {
+const getHistoryParse = (_state: BotStateStandAlone, k = 16, add = false): string => {
     const history = _state.get<History[]>('history') ?? []
+   
     const limitHistory = history.slice(-k)
+    let index:number = 1
     return limitHistory.reduce((prev, current) => {
-        const msg = current.role === 'user' ? `\nCliente: "${current.content}"` : `\nVendedor: "${current.content}"`
+        const role = current.role === 'user' ? 'Cliente' : 'Vendedor'
+        const msg = add ? `\n${index}) ${role}: "${current.content}"` : `\n${role}: "${current.content}"`
         prev += msg
+        if (add) index++
         return prev
     }, ``)
 }

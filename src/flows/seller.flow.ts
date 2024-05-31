@@ -25,7 +25,7 @@ const flowSeller = addKeyword(EVENTS.ACTION)
                 method: 'seller',
                 phone_number: ctx.from 
             }
-            const response = await ai.createChat(msg, '/rag/tecno')
+            const response = await ai.createChat(msg, `/rag/${process.env.APP_NAME}`)
 
             // Envio sticker saludando...
             if (countMessage == 1) {

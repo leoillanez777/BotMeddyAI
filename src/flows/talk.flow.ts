@@ -17,7 +17,6 @@ const flowSeller = addKeyword(EVENTS.ACTION)
             const history = getHistoryParse(state)
             
             await provider.vendor.sendPresenceUpdate('composing', ctx.key.remoteJid)
-            
 
             const msg:Message = { 
                 message: lastMessage.content, 
@@ -25,7 +24,7 @@ const flowSeller = addKeyword(EVENTS.ACTION)
                 method: 'seller',
                 phone_number: ctx.from 
             }
-            const response = await ai.createChat(msg, '/rag/tecno')
+            const response = await ai.createChat(msg, `/rag/${process.env.APP_NAME}`)
 
             // Envio sticker saludando...
             if (countMessage == 1) {

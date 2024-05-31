@@ -5,9 +5,6 @@ export type RespuestaDelChat = ResponseChat | ResponseChat[] | undefined
 
 class AIClass {
     private uri: string
-    constructor(_uri: string) {
-        this.uri = _uri
-    }
 
     createChat = async (messages: Message, uri?: string):Promise<string> => {
         try {

@@ -10,12 +10,12 @@ import { flowSchedule } from "../flows/schedule.flow"
  */
 export default async (ctx: BotContext, { state, gotoFlow, extensions }: BotMethods) => {
     const ai = extensions.ai as AIClass
-    const history = getHistoryParse(state)
-    console.log('///////// MAIN LAYER //////////')
+    const history = getHistoryParse(state, 10, true)
+    console.log(`///////// MAIN LAYER (${process.env.APP_NAME}) //////////`)
     console.log(`Historia en MAIN de ${ctx.from}: `, history)
     // TODO: Si envia 2 mensaje a la vez, esperar a conteste el otro.
     const msg: Message = { message: ctx.body, history: history }
-    const prediction:string = await ai.createChat(msg)
+    const prediction:string = await ai.createChat(msg, `/${process.env.APP_NAME}`)
 
     console.log('PREDICTION: 👉🏻', prediction)
     if (prediction.includes('SCHEDULE')) {

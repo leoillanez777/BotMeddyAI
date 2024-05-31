@@ -27,10 +27,10 @@ const flowSchedule = addKeyword<Provider, Database>(EVENTS.ACTION)
     }
     
     const ai = extensions.ai as AIClass
-    const history = getHistoryParse(state)
+    const history = getHistoryParse(state, 5, true)
 
     const msg:Message = { message: ctx.body, history: history, phone_number: ctx.from }
-    const resp:RespuestaDelChat = await ai.functionChat(msg, '/turnos/tecno')
+    const resp:RespuestaDelChat = await ai.functionChat(msg, `/turnos/${process.env.APP_NAME}`)
     
     if (resp !== undefined) {
         if (Array.isArray(resp)) {
@@ -67,12 +67,12 @@ const flowSchedule = addKeyword<Provider, Database>(EVENTS.ACTION)
     }
 }).addAction({ capture: true }, async ({ body }, { gotoFlow, endFlow, state, extensions }) => {
     const ai = extensions.ai as AIClass
-    const history = getHistoryParse(state)
+    const history = getHistoryParse(state, 6, true)
 
     const msg: Message = { message: body, history: history, method: 'confirm' }
-    const confirm:string = await ai.createChat(msg)
+    const confirm:string = await ai.createChat(msg, `/${process.env.APP_NAME}`)
 
-    console.log('CONFIRMA?: 👉🏻', confirm)
+    console.log('Intención: 👉🏻', confirm)
 
     await handleHistory({ content: body, role: 'user' }, state)
 

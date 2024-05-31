@@ -5,7 +5,7 @@ import AIClass from './services/ai';
 import flows from './flows';
 
 const PORT = process.env.PORT ?? 3001
-const ai = new AIClass('llama2:system', )
+const ai = new AIClass()
 
 const main = async () => {
 
