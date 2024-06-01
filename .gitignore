@@ -3,4 +3,5 @@ dist/
 *_sessions
 *qr.png
 *.log
+# Secret
 *.env
