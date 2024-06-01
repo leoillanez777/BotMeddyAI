@@ -3,3 +3,4 @@ dist/
 *_sessions
 *qr.png
 *.log
+*.env
